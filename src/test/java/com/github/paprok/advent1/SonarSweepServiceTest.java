@@ -22,15 +22,15 @@ public class SonarSweepServiceTest {
     @InjectMocks
     private SonarSweepService sonarSweepService;
     @Spy
-    private FileReader fileReader = new FileReader();
-    @Spy
     private AdventMapper<Integer> integerAdventMapper = new IntegerMapper();
+    @Spy
+    private FileReader<Integer> fileReader = new FileReader<>(integerAdventMapper);
 
     @Test
     @SneakyThrows
     void measurementIncreasesReturnsExpected() {
         // given
-        doReturn(List.of(199, 200, 208, 210, 200, 207, 240, 269, 260, 263)).when(fileReader).produceWith(any(), integerAdventMapper);
+        doReturn(List.of(199, 200, 208, 210, 200, 207, 240, 269, 260, 263)).when(fileReader).produceWith(any());
         int expected = 7;
 
         // when
@@ -43,9 +43,9 @@ public class SonarSweepServiceTest {
     @Test
     @SneakyThrows
     public void testExecution() {
-        FileReader fileReader = new FileReader();
         AdventMapper<Integer> sonarMapper = new IntegerMapper();
-        SonarSweepService sonarSweep = new SonarSweepService(fileReader, sonarMapper);
+        FileReader<Integer> fileReader = new FileReader<>(sonarMapper);
+        SonarSweepService sonarSweep = new SonarSweepService(fileReader);
         int actual = sonarSweep.summedMeasurementIncreases();
         assertEquals(1457, actual);
     }
@@ -53,7 +53,7 @@ public class SonarSweepServiceTest {
     @Test
     @SneakyThrows
     void summedMeasurementIncreasesReturnsExpected() {
-        doReturn(List.of(199, 200, 208, 210, 200, 207, 240, 269, 260, 263)).when(fileReader).produceWith(any(), any());
+        doReturn(List.of(199, 200, 208, 210, 200, 207, 240, 269, 260, 263)).when(fileReader).produceWith(any());
         int expected = 5;
 
         // when

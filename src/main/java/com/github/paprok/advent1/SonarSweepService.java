@@ -10,14 +10,13 @@ import java.util.stream.IntStream;
 
 @RequiredArgsConstructor
 public class SonarSweepService {
-    private final FileReader fileReader;
-    private final AdventMapper<Integer> integerAdventMapper;
+    private final FileReader<Integer> fileReader;
 
     public static final String fileName = "day1.txt";
 
     // could have been parametrized with ie enum instead of repeating public methods
     public int measurementIncreases() throws IOException {
-        List<Integer> measurements = fileReader.produceWith(fileName, integerAdventMapper);
+        List<Integer> measurements = fileReader.produceWith(fileName);
 
         return countIncreases(measurements);
     }
@@ -34,7 +33,7 @@ public class SonarSweepService {
 
     // could have been parametrized with ie enum instead of repeating public methods same for countIncreases
     public int summedMeasurementIncreases() throws IOException {
-        List<Integer> measurements = fileReader.produceWith(fileName, integerAdventMapper);
+        List<Integer> measurements = fileReader.produceWith(fileName);
 
         return countSummedIncreases(measurements);
     }

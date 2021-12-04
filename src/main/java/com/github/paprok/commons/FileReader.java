@@ -1,5 +1,7 @@
 package com.github.paprok.commons;
 
+import lombok.RequiredArgsConstructor;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,10 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FileReader {
+@RequiredArgsConstructor
+public class FileReader <T>{
+    private final AdventMapper<T> mapper;
 
     // TODO refactor with producers implementing same interfaces, and ofc generic return type (or another interface?) based on interface<T>
-    public <T> List<T> produceWith(String fileName, AdventMapper<T> mapper) throws IOException {
+    public List<T> produceWith(String fileName) throws IOException {
         return getLines(fileName).stream()
                 .map(mapper::map)
                 .collect(Collectors.toList());
