@@ -10,7 +10,7 @@ import java.util.List;
 public class FileReader {
 
     // TODO refactor with producers implementing same interfaces, and ofc generic return type (or another interface?) based on interface<T>
-    public List<String> produceWith(String fileName) throws IOException {
+    public List<Integer> produceWith(String fileName) throws IOException {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream(fileName);
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             return produce(reader);
@@ -18,16 +18,16 @@ public class FileReader {
     }
 
     // TODO: producer will contain method  to return empty
-    List<String> produce(BufferedReader reader) throws IOException {
+    List<Integer> produce(BufferedReader reader) throws IOException {
         return produce(reader, new ArrayList<>());
     }
 
-    List<String> produce(BufferedReader reader, List<String> product) throws IOException {
+    List<Integer> produce(BufferedReader reader, List<Integer> product) throws IOException {
         return reader.ready() ? produce(reader, updateAndGet(product, reader.readLine())) : product;
     }
 
-    List<String> updateAndGet(List<String> product, String line) {
-        product.add(line);
+    List<Integer> updateAndGet(List<Integer> product, String line) {
+        product.add(Integer.valueOf(line));
         return product;
     }
 }

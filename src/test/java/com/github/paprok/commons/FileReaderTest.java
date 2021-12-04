@@ -6,10 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.io.IOException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 public class FileReaderTest {
@@ -28,7 +27,7 @@ public class FileReaderTest {
         String fileName = "day1.txt";
 
         // when
-        List<String> actual = fileReader.produceWith(fileName);
+        List<Integer> actual = fileReader.produceWith(fileName);
 
         //then
         assertEquals(actual.size(), 2000);
