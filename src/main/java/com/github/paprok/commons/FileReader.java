@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReader {
+
     // TODO refactor with producers implementing same interfaces, and ofc generic return type (or another interface?) based on interface<T>
     public List<String> produceWith(String fileName) throws IOException {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream(fileName);
