@@ -12,6 +12,7 @@ public class SonarSweepService {
     public static final String fileName = "day1.txt";
     private final FileReader fileReader;
 
+    // could have been parametrized with ie enum instead of repeating public methods
     public int measurementIncreases() throws IOException {
         List<Integer> measurements = fileReader.produceWith(fileName);
 
@@ -26,5 +27,24 @@ public class SonarSweepService {
 
     private int mapIndexTo1IfIncreased(int index, List<Integer> measurements) {
         return measurements.get(index) > measurements.get(index - 1) ? 1 : 0;
+    }
+
+    // could have been parametrized with ie enum instead of repeating public methods same for countIncreases
+    public int summedMeasurementIncreases() throws IOException {
+        List<Integer> measurements = fileReader.produceWith(fileName);
+
+        return countSummedIncreases(measurements);
+    }
+
+    private int countSummedIncreases(List<Integer> measurements) {
+        return IntStream.range(3, measurements.size())
+                .map(index -> mapIndexTo1IfSumIncreased(index, measurements))
+                .sum();
+    }
+
+    private int mapIndexTo1IfSumIncreased(int index, List<Integer> measurements) {
+        int rightSum = measurements.subList(index - 2, index+1).stream().reduce(0, Integer::sum);
+        int leftSum = measurements.subList(index - 3, index).stream().reduce(0, Integer::sum);
+        return rightSum > leftSum ? 1 : 0;
     }
 }

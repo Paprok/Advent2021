@@ -23,15 +23,9 @@ public class SonarSweepServiceTest {
     @Spy
     private FileReader fileReader = new FileReader();
 
-//    @BeforeEach
-//    void setUp() {
-//        sonarSweepService = new SonarSweepService(fileReader);
-//
-//    }
-
     @Test
     @SneakyThrows
-    void measurementIncreases() {
+    void measurementIncreasesReturnsExpected() {
         // given
         doReturn(List.of(199, 200, 208, 210, 200, 207, 240, 269, 260, 263)).when(fileReader).produceWith(any());
         int expected = 7;
@@ -48,7 +42,20 @@ public class SonarSweepServiceTest {
     public void testExectution() {
         FileReader fileReader = new FileReader();
         SonarSweepService sonarSweep = new SonarSweepService(fileReader);
-        int actual = sonarSweep.measurementIncreases();
-        assertEquals(1390, actual);
+        int actual = sonarSweep.summedMeasurementIncreases();
+        assertEquals(1457, actual);
+    }
+
+    @Test
+    @SneakyThrows
+    void summedMeasurementIncreasesReturnsExpected() {
+        doReturn(List.of(199, 200, 208, 210, 200, 207, 240, 269, 260, 263)).when(fileReader).produceWith(any());
+        int expected = 5;
+
+        // when
+        int actual = sonarSweepService.summedMeasurementIncreases();
+
+        //then
+        assertEquals(expected, actual);
     }
 }
