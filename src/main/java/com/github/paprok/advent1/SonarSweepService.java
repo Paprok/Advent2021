@@ -1,5 +1,6 @@
 package com.github.paprok.advent1;
 
+import com.github.paprok.commons.AdventMapper;
 import com.github.paprok.commons.FileReader;
 import lombok.RequiredArgsConstructor;
 
@@ -9,12 +10,14 @@ import java.util.stream.IntStream;
 
 @RequiredArgsConstructor
 public class SonarSweepService {
-    public static final String fileName = "day1.txt";
     private final FileReader fileReader;
+    private final AdventMapper<Integer> integerAdventMapper;
+
+    public static final String fileName = "day1.txt";
 
     // could have been parametrized with ie enum instead of repeating public methods
     public int measurementIncreases() throws IOException {
-        List<Integer> measurements = fileReader.produceWith(fileName);
+        List<Integer> measurements = fileReader.produceWith(fileName, integerAdventMapper);
 
         return countIncreases(measurements);
     }
@@ -31,7 +34,7 @@ public class SonarSweepService {
 
     // could have been parametrized with ie enum instead of repeating public methods same for countIncreases
     public int summedMeasurementIncreases() throws IOException {
-        List<Integer> measurements = fileReader.produceWith(fileName);
+        List<Integer> measurements = fileReader.produceWith(fileName, integerAdventMapper);
 
         return countSummedIncreases(measurements);
     }

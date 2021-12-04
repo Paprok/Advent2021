@@ -1,5 +1,6 @@
 package com.github.paprok.commons;
 
+import com.github.paprok.advent1.IntegerMapper;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,10 +15,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class FileReaderTest {
 
     FileReader fileReader;
+    AdventMapper<Integer> mapper;
 
     @BeforeEach
     void init() {
         fileReader = new FileReader();
+        mapper = new IntegerMapper();
     }
 
     @Test
@@ -27,9 +30,10 @@ public class FileReaderTest {
         String fileName = "day1.txt";
 
         // when
-        List<Integer> actual = fileReader.produceWith(fileName);
+        List<Integer> actual = fileReader.produceWith(fileName, mapper);
 
         //then
         assertEquals(actual.size(), 2000);
+        assertEquals(actual.get(0), Integer.valueOf(189));
     }
 }
