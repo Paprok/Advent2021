@@ -1,7 +1,5 @@
 package com.github.paprok.advent2;
 
-import com.github.paprok.advent1.IntegerMapper;
-import com.github.paprok.advent1.SonarSweepService;
 import com.github.paprok.commons.AdventMapper;
 import com.github.paprok.commons.FileReader;
 import lombok.SneakyThrows;
@@ -13,7 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 
@@ -32,13 +30,13 @@ class DiveServiceTest {
     void getMultipliedCoordinatesReturnsExpected() {
         // given
         doReturn(List.of(
-                new DiveCoordinates(0,0,0, 5),
-                new DiveCoordinates(0, 0,5, 0),
-                new DiveCoordinates(0,0, 0,8),
-                new DiveCoordinates(0, 0,-3, 0),
+                new DiveCoordinates(0, 0, 0, 5),
+                new DiveCoordinates(0, 0, 5, 0),
+                new DiveCoordinates(0, 0, 0, 8),
+                new DiveCoordinates(0, 0, -3, 0),
                 new DiveCoordinates(0, 0, 8, 0),
-                new DiveCoordinates(0, 0, 0,2)
-                )).when(fileReader).produceWith(any());
+                new DiveCoordinates(0, 0, 0, 2)
+        )).when(fileReader).produceWith(any());
 
         // when
         long actual = diveService.getMultipliedCoordinates();

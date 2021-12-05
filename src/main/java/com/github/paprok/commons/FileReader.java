@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 public class FileReader <T>{
     private final AdventMapper<T> mapper;
 
-    // TODO refactor with producers implementing same interfaces, and ofc generic return type (or another interface?) based on interface<T>
     public List<T> produceWith(String fileName) throws IOException {
         return getLines(fileName).stream()
                 .map(mapper::map)
