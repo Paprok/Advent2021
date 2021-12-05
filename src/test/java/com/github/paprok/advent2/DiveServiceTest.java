@@ -32,19 +32,19 @@ class DiveServiceTest {
     void getMultipliedCoordinatesReturnsExpected() {
         // given
         doReturn(List.of(
-                new DiveCoordinates(5, 0),
-                new DiveCoordinates(0, 5),
-                new DiveCoordinates(8, 0),
-                new DiveCoordinates(0, -3),
-                new DiveCoordinates(0, 8),
-                new DiveCoordinates(2, 0)
+                new DiveCoordinates(0,0,0, 5),
+                new DiveCoordinates(0, 0,5, 0),
+                new DiveCoordinates(0,0, 0,8),
+                new DiveCoordinates(0, 0,-3, 0),
+                new DiveCoordinates(0, 0, 8, 0),
+                new DiveCoordinates(0, 0, 0,2)
                 )).when(fileReader).produceWith(any());
 
         // when
         long actual = diveService.getMultipliedCoordinates();
 
         // then
-        assertEquals(150, actual);
+        assertEquals(900, actual);
     }
 
     @Test
@@ -59,6 +59,6 @@ class DiveServiceTest {
         long actual = diveService.getMultipliedCoordinates();
 
         // then
-        assertEquals(1893605, actual);
+        assertEquals(2120734350, actual);
     }
 }

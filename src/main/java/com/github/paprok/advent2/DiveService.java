@@ -13,6 +13,6 @@ public class DiveService {
 
     public long getMultipliedCoordinates() throws IOException {
         List<DiveCoordinates> diveCoordinates = fileReader.produceWith(fileName);
-        return diveCoordinates.stream().reduce(new DiveCoordinates(0,0), DiveCoordinates::add).multiply();
+        return diveCoordinates.stream().reduce(new DiveCoordinates(0,0, 0, 0), DiveCoordinates::add).multiply();
     }
 }

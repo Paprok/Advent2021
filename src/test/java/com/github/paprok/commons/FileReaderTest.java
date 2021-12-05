@@ -44,8 +44,8 @@ public class FileReaderTest {
 
         //them
         assertEquals(1000, actual.size());
-        assertEquals(new DiveCoordinates(4, 0), actual.get(0));
-        assertEquals(new DiveCoordinates(0, 9), actual.get(1));
-        assertEquals(new DiveCoordinates(0, -2), actual.get(5));
+        assertEquals(new DiveCoordinates(0,0,0, 4), actual.get(0));
+        assertEquals(new DiveCoordinates(0, 0, 9, 0), actual.get(1));
+        assertEquals(new DiveCoordinates(0,0,-2, 0), actual.get(5));
     }
 }
